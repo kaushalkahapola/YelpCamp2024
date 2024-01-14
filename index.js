@@ -47,23 +47,21 @@ app.get('/campgrounds', catchAsync( async (req, res) => {
     res.render('campgrounds/index', { camps })
 }))
 
-app.post('/campgrounds', catchAsync( async (req, res) => {
-    const {title , location , price, description, image} = req.body
-    const camp = new Campground({title , location , price, description, image} )
+app.post('/campgrounds', catchAsync( async (req, res) => {  
+    const camp = new Campground(req.body.campground)
     await camp.save()
     res.redirect(`/campgrounds/${camp._id}`)
 }))
 
 app.put('/campgrounds/:id', catchAsync(async (req, res) => {
-    const {title,location,price,description,image} = req.body
-    await Campground.findByIdAndUpdate(req.params.id, {title,location,price,description,image})
-    res.redirect(`/campgrounds/${req.params.id}`)
+    const {id} = req.params
+    await Campground.findByIdAndUpdate(id, { ...req.body.campground })
+    res.redirect(`/campgrounds/${id}`)
 }))
 
 app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
-    const {title,location,price,description,image} = req.body
-    await Campground.findByIdAndUpdate(req.params.id, {title,location,price,description,image})
-    res.redirect(`/campgrounds/${req.params.id}`)
+    const campground = await Campground.findById(req.params.id)
+    res.render('campgrounds/edit', { campground });
 }))
 
 app.get('/campgrounds/new', (req, res) => {

@@ -5,13 +5,13 @@
     <form action="/campgrounds" method="POST" novalidate class="needs-validation">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
-        <input class="form-control" type="text" name="title" id="title"  required/>
+        <input class="form-control" type="text" name="campground[title]" id="title"  required/>
         <div class="invalid-feedback">Please add a valid title</div>
         <div class="valid-feedback">Looks Good !!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
-        <input class="form-control" type="text" name="location" id="location"  required/>
+        <input class="form-control" type="text" name="campground[location]" id="location"  required/>
         <div class="invalid-feedback">Please add a valid location</div>
         <div class="valid-feedback">Looks Good !!</div>
       </div>
@@ -25,7 +25,7 @@
           placeholder="0.00"
           aria-label="price"
           aria-describedby="price-label"
-          name="price"
+          name="campground[price]"
           required/>
           <div class="invalid-feedback">Please add a valid price</div>
           <div class="valid-feedback">Looks Good !!</div>
@@ -33,13 +33,13 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
-        <textarea class="form-control" type="text" name="description" id="description" required></textarea>
+        <textarea class="form-control" type="text" name="campground[description]" id="description" required></textarea>
         <div class="invalid-feedback">Please add a valid description</div>
         <div class="valid-feedback">Looks Good !!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image URL</label>
-        <input class="form-control" type="text" name="image" id="image" required/>
+        <input class="form-control" type="text" name="campground[image]" id="image" required/>
         <div class="invalid-feedback">Please add a valid image URL</div>
         <div class="valid-feedback">Looks Good !!</div>
         </div>
