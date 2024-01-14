@@ -6,6 +6,7 @@ const catchAsync = require('./utils/catchAsync')
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 const Campground = require('./models/campground');
+const ExpressError = require('./utils/ExpressError');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     useNewUrlParser: true,
@@ -47,7 +48,8 @@ app.get('/campgrounds', catchAsync( async (req, res) => {
     res.render('campgrounds/index', { camps })
 }))
 
-app.post('/campgrounds', catchAsync( async (req, res) => {  
+app.post('/campgrounds', catchAsync( async (req, res) => { 
+    if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400); 
     const camp = new Campground(req.body.campground)
     await camp.save()
     res.redirect(`/campgrounds/${camp._id}`)
@@ -80,8 +82,14 @@ app.delete('/campgrounds/:id', catchAsync( async (req,res) =>{
     res.redirect('/campgrounds')
 }))
 
+app.all('*', (req,res,next)=>{
+    next(new ExpressError('Page Not Found', 404))
+})
+
 app.use((err,req,res,next)=>{
-    res.send("oh boy something went rong")
+    const {status = 500 } = err;
+    if(!err.message) err.message = "oh No! Something Went Wrong"
+    res.status(status).render('error',{err})
 })
 
 
