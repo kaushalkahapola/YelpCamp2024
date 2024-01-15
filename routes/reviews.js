@@ -31,7 +31,12 @@ router.post('/new', ValidateReview, async (req,res)=>{
 router.delete('/:reviewId',catchAsync(async(req,res)=>{
     const {id,reviewId} = req.params;
     await Campground.findByIdAndUpdate(id, {$pull:{reviews:reviewId}})
-    await Review.findByIdAndDelete(reviewId)
+    const review = await Review.findByIdAndDelete(reviewId, {new:true})
+    console.log(review)
+    if(!review){
+        req.flash('error','Review Not Found !!')
+        return res.redirect('/campgrounds')
+    }
     req.flash('success','Successfully deleted the review')
     res.redirect(`/campgrounds/${id}`)
 }))
