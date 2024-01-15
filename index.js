@@ -1,6 +1,7 @@
 const { log } = require('console');
 const express = require('express');
 const session = require('express-session')
+const flash = require('connect-flash')
 const path = require('path');
 const ejsMate = require('ejs-mate')
 const mongoose = require('mongoose');
@@ -41,6 +42,13 @@ const sessionConfig = {
 }
 
 app.use(session(sessionConfig))
+app.use(flash())
+
+app.use((req,res,next)=>{
+    res.locals.success = req.flash('success')
+    res.locals.error = req.flash('error')
+    next()
+})
 
 
 app.use('/campgrounds',campgrounds)
