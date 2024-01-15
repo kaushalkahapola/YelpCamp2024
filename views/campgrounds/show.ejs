@@ -2,25 +2,51 @@
 <div class="row">
   <div class="col-6 offset-3">
     <div class="card my-4">
-        <img src="<%=camp.image %>" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title"><%= camp.title %></h5>
-          <p class="card-text">
-            <%= camp.description %>
-          </p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-secondary"><%= camp.location %></li>
-          <li class="list-group-item">$<%= camp.price %>/night</li>
-          <!-- <li class="list-group-item">A third item</li> -->
-        </ul>
-        <div class="card-body">
-            <a class="card-link btn btn-info" href="/campgrounds/<%=camp._id %>/edit">edit</a>
-            <form class="d-inline" action="/campgrounds/<%=camp._id %>?_method=DELETE" method="POST">
-              <button class="card-link btn btn-danger">Delete Camp</button>
-            </form>
-        </div>
+      <img src="<%=campground.image %>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%= campground.title %></h5>
+        <p class="card-text"><%= campground.description %></p>
       </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-secondary"><%= campground.location %></li>
+        <li class="list-group-item">$<%= campground.price %>/night</li>
+        <!-- <li class="list-group-item">A third item</li> -->
+      </ul>
+      <div class="card-body">
+        <a
+          class="card-link btn btn-info"
+          href="/campgrounds/<%=campground._id %>/edit"
+          >edit</a
+        >
+        <form
+          class="d-inline"
+          action="/campgrounds/<%=campground._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="card-link btn btn-danger">Delete campground</button>
+        </form>
+      </div>
+    </div>
+    <div class="my-4">
+      <h2>Leave a Review</h2>
+      <form action="/campgrounds/<%=campground._id %>/reviews/new" method="post">
+        <div class="mb-3">
+          <label class="form-label" for="rating">Rating</label>
+          <input
+            class="form-range"
+            type="range"
+            name="review[rating]"
+            id="rating"
+            min="1"
+            max="5"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="body" class="form-label">Review</label>
+          <textarea class="form-control" type="text" name="review[body]" id="body"></textarea>
+        </div>
+        <button class="btn btn-success">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
-
