@@ -8,6 +8,7 @@ module.exports.index = async (req, res) => {
 module.exports.new = async (req, res) => {
     if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
     const camp = new Campground(req.body.campground)
+    camp.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     camp.author = req.user._id
     await camp.save()
     req.flash('success','Successfully added a new campground')
