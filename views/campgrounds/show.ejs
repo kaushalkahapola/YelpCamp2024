@@ -1,22 +1,17 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="/stylesheets/imgheight.css">
 
 <div class="row">
   <div class="col-6">
     <div class="card my-4">
-      <div id="carouselExampleRide" class="carousel slide  card-img-top" data-bs-ride="carousel">
+      <div id="carouselExampleRide" class="carousel slide card-img-top" data-bs-ride="carousel">
         <div class="carousel-inner">
           <% for (let i = 0; i < campground.images.length; i++) { %>
             <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-              <img src="<%= campground.images[i].url %>" class="d-block w-100" alt="...">
+              <img src="<%= campground.images[i].url %>" class="d-block w-100 cropped-image" alt="...">
             </div>
           <% } %>
-          <!-- <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div> -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -27,6 +22,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+      
       <div class="card-body">
         <h5 class="card-title"><%= campground.title %></h5>
         <p class="card-text"><%= campground.description %></p>
