@@ -34,10 +34,19 @@ YelpCamp is a web application for sharing and reviewing campgrounds. This projec
     - Make sure you have MongoDB installed.
     - Configure your MongoDB connection in the application.
 
-4. Run the application:
+
+4. Seed initial data:
+
+    Run the following command to seed the database with initial data:
 
     ```bash
-    node app.js
+    node seeds/index.js
+    ```
+    
+5. Run the application:
+
+    ```bash
+    node index.js
     ```
 
 5. Open your web browser and visit [http://localhost:8000](http://localhost:8000) to view YelpCamp.
